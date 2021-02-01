@@ -19,19 +19,21 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		
 	
+		
 		
 	double random = Math.random() + 1;
 	int intentos = (int) Math.floor(random);
 	
-	Coche car = new Coche("Yo", 23);
-	int opc=0, km=car.getKmRecorridos();
-		
+	Carrera c = new Carrera("Juan", 100);
+	int opc=0; 
+	Coche car;
 		
 		do {
 			opc=pintaMenu();
+			car=c.getvCoches()[0];
 			switch (opc) {
+		
 			case 1:
 				car.arrancar();
 				System.out.println();
@@ -45,12 +47,10 @@ public class Main {
 				System.out.println();
 				break;
 			case 4:
-				
 				car.rearrancar(intentos);
 				if (intentos>0) {
 					intentos--;
 				}
-				//try_catch
 				System.out.println();
 				break;
 			}

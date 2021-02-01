@@ -12,7 +12,7 @@ public class Coche {
 
 	
 	
-	public Coche(String nombrePiloto, int dorsal) {
+	public Coche(String nombrePiloto, int dorsal) { 
 		super();
 		this.nombrePiloto = nombrePiloto;
 		this.dorsal = dorsal;
@@ -22,6 +22,16 @@ public class Coche {
 		distanciaCarrera = 300; // De momento
 	}
 
+	public Coche(String nombrePiloto, int dorsal,int distancia) { 
+		super();
+		this.nombrePiloto = nombrePiloto;
+		this.dorsal = dorsal;
+		this.estadoCoche = "PARADO";
+		this.velocidad = 0;
+		this.kmRecorridos = 0;
+		distanciaCarrera = distancia;
+	}
+	
 	public String getNombrePiloto() {
 		return nombrePiloto;
 	}
@@ -113,8 +123,7 @@ public class Coche {
 			} else {
 				kmRecorridos += acel;
 			}
-			System.out.println("Vas a "+velocidad+ " km/h");
-			System.out.println("Has recorido "+kmRecorridos+" kilometros");
+			
 			break;
 
 		case "ACCIDENTADO":
@@ -138,14 +147,11 @@ public class Coche {
 			double random = Math.random() * this.POTENCIA + 1;
 			int acel = (int) Math.floor(random);
 			velocidad -= acel;
-			if (velocidad > 200) {
-				estadoCoche = "ACCIDENTADO";
+			if (velocidad < 0) {
 				velocidad = 0;
 			} else {
 				kmRecorridos += acel;
 			}
-			System.out.println(velocidad);
-			System.out.println(kmRecorridos);
 			break;
 
 		case "ACCIDENTADO":
@@ -174,6 +180,13 @@ public class Coche {
 		//System.out.println(intentos);
 		System.out.println(getEstadoCoche());
 	}
+
+	@Override
+	public String toString() {
+		return "Coche nombrePiloto " + nombrePiloto + ", dorsal " + dorsal + ", estadoCoche " + estadoCoche 
+				+ ", velocidad " + velocidad + ", kmRecorridos " + kmRecorridos;
+	}
+	
 	
 	
 }
