@@ -175,8 +175,4 @@ public class Coche {
 		System.out.println(getEstadoCoche());
 	}
 	
-	public void mantenerVelocidad() {
-		System.out.println(velocidad);
-		System.out.println(kmRecorridos);
-	}
 }
