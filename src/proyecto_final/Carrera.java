@@ -39,7 +39,7 @@ public class Carrera {
 	
 	@Override
 	public String toString() {
-		return "Carrera nombre " + nombre + ", kilometros " + kilometros + ", corresores " + corresores;
+		return "Carrera nombre " + nombre + ", kilometros " + kilometros + ", corresores " + corresores+" hola";
 	}
 	
 	
