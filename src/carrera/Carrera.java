@@ -3,117 +3,102 @@ package carrera;
 import java.util.Scanner;
 
 public class Carrera {
-	
+
 	private String nombreCarrera;
-	private String nombre;
-	private int dorsal;
-	private int distancia;
 	private int kilometros;
-	private boolean comprobarDorsal;
-	private static Coche vCoches[];
-	
-	
-	public Carrera(String nombre, int kilometros) {
-		this.nombre = nombre;
+	private Coche vCoches[];
+
+	public Carrera(String nombreCarrera, int kilometros) {
+		this.nombreCarrera = nombreCarrera;
 		this.kilometros = kilometros;
-		this.vCoches = new Coche [10];
-	}
-	
-	
-	public void rellenarCoche() {
-		Scanner leer = new Scanner(System.in);
-		
-		for (int i = 0; i < vCoches.length; i++) {
-			if (vCoches[i]==null) {
-				System.out.println("Dime el nombre del Piloto");
-				nombre = leer.next();
-				
-				do {
-					
-					System.out.println("Dime su dorsal");
-					dorsal = leer.nextInt();
-					
-				} while (comprobarDorsal(dorsal));
-				
-				
-				Coche car = new Coche(nombre, dorsal);
-			}
-		}
-		
-		
+		this.vCoches = new Coche[10];
 	}
 
+	
+		
+	public void rellenarCoche() {
+		Scanner leer = new Scanner(System.in);
+		String nombre;
+		boolean humano;
+		int dorsal;
+		for (int i = 0; i < vCoches.length; i++) {
+			if (vCoches[i] == null) {
+				System.out.println("Dime el nombre del Piloto");
+				nombre = leer.next();
+
+				do {
+
+					System.out.println("Dime su dorsal");
+					dorsal = leer.nextInt();
+
+				} while (!comprobarDorsal(dorsal));
+
+				System.out.println("Es humano");
+				humano = leer.nextBoolean();
+				
+				vCoches[i] = new Coche(nombre,dorsal,this.kilometros,humano);
+				
+				break;
+			}
+		}
+
+	}
 
 	private boolean comprobarDorsal(int dorsal) {
 		for (Coche coche : vCoches) {
-			if (comprobarDorsal==vCoches[]) {
-				
-			};
+			if (coche!=null && dorsal == coche.getDorsal()) {
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
+	public boolean poderRearrancar() {
+
+		for (Coche coche : vCoches) {
+
+			if (coche != null && coche.getEstadoCoche().equalsIgnoreCase("TERMINADO")) {
+				return false;
+			}
+
+		}
+		return true;
+	}
+	
+	
 
 	public String getNombreCarrera() {
 		return nombreCarrera;
 	}
 
-
 	public void setNombreCarrera(String nombreCarrera) {
 		this.nombreCarrera = nombreCarrera;
 	}
 
+	
 
-	public String getNombre() {
-		return nombre;
-	}
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
-	public int getDorsal() {
-		return dorsal;
-	}
-
-
-	public void setDorsal(int dorsal) {
-		this.dorsal = dorsal;
-	}
-
-
-	public int getDistancia() {
-		return distancia;
-	}
-
-
-	public void setDistancia(int distancia) {
-		this.distancia = distancia;
-	}
-
+	
 
 	public int getKilometros() {
 		return kilometros;
 	}
 
-
 	public void setKilometros(int kilometros) {
 		this.kilometros = kilometros;
 	}
 
-
-	public static Coche[] getvCoches() {
+	public  Coche[] getvCoches() {
 		return vCoches;
 	}
 
-
-	public static void setvCoches(Coche[] vCoches) {
-		Carrera.vCoches = vCoches;
+	public void setvCoches(Coche[] vCoches) {
+		this.vCoches = vCoches;
 	}
-	
-	
-}
-	
 
+
+	public boolean carreraTerminada() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

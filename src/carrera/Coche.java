@@ -9,6 +9,7 @@ public class Coche {
 	private final int POTENCIA = 50;
 	private int velocidad;
 	private int kmRecorridos;
+	private boolean humano;
 
 	
 	
@@ -30,6 +31,24 @@ public class Coche {
 		this.velocidad = 0;
 		this.kmRecorridos = 0;
 		distanciaCarrera = distancia;
+	}
+	
+	public Coche(String nombrePiloto, int dorsal,int distancia, boolean humano) { 
+		super();
+		this.nombrePiloto = nombrePiloto;
+		this.dorsal = dorsal;
+		this.estadoCoche = "PARADO";
+		this.velocidad = 0;
+		this.kmRecorridos = 0;
+		distanciaCarrera = distancia;
+		this.humano = humano;
+	}
+	
+	public boolean isHumano() {
+		if (humano==true) {
+			return true;
+		}
+		return false;
 	}
 	
 	public String getNombrePiloto() {
@@ -104,6 +123,8 @@ public class Coche {
 		}
 
 	}
+	
+	
 
 	public void acelerar() {
 
@@ -114,6 +135,7 @@ public class Coche {
 			break;
 
 		case "MARCHA":
+			//System.out.println(nombrePiloto);
 			double random = Math.random() * this.POTENCIA + 1;
 			int acel = (int) Math.floor(random);
 			velocidad += acel;
@@ -123,7 +145,7 @@ public class Coche {
 			} else {
 				kmRecorridos += acel;
 			}
-			
+			System.out.println(toString());
 			break;
 
 		case "ACCIDENTADO":
@@ -152,6 +174,7 @@ public class Coche {
 			} else {
 				kmRecorridos += acel;
 			}
+			System.out.println(toString());
 			break;
 
 		case "ACCIDENTADO":
