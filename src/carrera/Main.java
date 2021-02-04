@@ -32,10 +32,6 @@ public class Main {
 								opc = Menu.pintaMenuCarrera();
 								switch (opc) {
 
-								case 1:
-									car.arrancar();
-									System.out.println();
-									break;
 								case 2:
 									car.acelerar();
 									System.out.println();

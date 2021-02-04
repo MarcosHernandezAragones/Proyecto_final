@@ -97,7 +97,7 @@ public class Carrera {
 
 
 	public boolean carreraTerminada() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
