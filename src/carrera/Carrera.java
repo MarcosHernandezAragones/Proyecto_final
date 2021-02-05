@@ -32,11 +32,14 @@ public class Carrera {
 					dorsal = leer.nextInt();
 
 				} while (!comprobarDorsal(dorsal));
-
-				System.out.println("Es humano");
-				humano = leer.nextBoolean();
+				
+					
+					System.out.println("Es humano");
+					humano = leer.nextBoolean();
+				
 				
 				vCoches[i] = new Coche(nombre,dorsal,this.kilometros,humano);
+				
 				
 				break;
 			}
@@ -57,7 +60,7 @@ public class Carrera {
 
 		for (Coche coche : vCoches) {
 
-			if (coche != null && coche.getEstadoCoche().equalsIgnoreCase("TERMINADO")) {
+			if (coche != null && coche.getEstadoCoche().equalsIgnoreCase("MARCHA")) {
 				return false;
 			}
 
@@ -98,11 +101,11 @@ public class Carrera {
 
 	public boolean carreraTerminada() {
 		for (Coche coche : vCoches) {
-            if (coche != null && coche.getEstadoCoche().equalsIgnoreCase("Marcha")) {
-                return false;
-            }
-        }
-        return true;
+			if (coche!=null && coche.getEstadoCoche().equalsIgnoreCase("MARCHA")) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

@@ -1,5 +1,6 @@
 package carrera;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -33,10 +34,21 @@ public class Main {
 								switch (opc) {
 
 								case 2:
-									car.acelerar();
-									System.out.println();
+									if (car.getEstadoCoche().equalsIgnoreCase("ACCIDENTADO")) {
+										System.out.println("no puedes acelerar");
+									}else {
+										car.acelerar();
+										System.out.println();
+									}
+									
 									break;
 								case 3:
+									if (car.getEstadoCoche().equalsIgnoreCase("ACCIDENTADO")) {
+										System.out.println("no puedes frenar");
+									}else {
+										car.frenar();
+										System.out.println();
+									}
 									car.frenar();
 									System.out.println();
 									break;
@@ -50,14 +62,14 @@ public class Main {
 								}
 							} else {
 								// Juega Maquina aleatorio
-								
-								double opcma = Math.random() + 1;
-								int opcMa = (int) Math.floor(opcma);
-								if (car.getEstadoCoche()=="ACCIDENTADO") {
+								Random r = new Random();
+								int opcma = r.nextInt(2);
+								//int opcMa = (int) Math.floor(opcma);
+								if (car.getEstadoCoche().equalsIgnoreCase("ACCIDENTADO")) {
 									car.setEstadoCoche("MARCHA");
 								}else {
 									
-									switch (opcMa) {
+									switch (opcma) {
 									
 									case 0:
 										car.acelerar();
@@ -77,7 +89,8 @@ public class Main {
 					}
 
 				} while (!c.carreraTerminada());
-
+				System.out.println("Carrera finalizada");
+				opc1=4;
 				break;
 			case 2:
 				System.out.println("añadiendo corredor");
