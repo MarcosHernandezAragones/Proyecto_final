@@ -97,8 +97,12 @@ public class Carrera {
 
 
 	public boolean carreraTerminada() {
-		
-		return false;
+		for (Coche coche : vCoches) {
+            if (coche != null && coche.getEstadoCoche().equalsIgnoreCase("Marcha")) {
+                return false;
+            }
+        }
+        return true;
 	}
 
 }
