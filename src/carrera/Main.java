@@ -1,62 +1,126 @@
 package carrera;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-	
-	public static int pintaMenu() {
-		int opc =0;
-		Scanner leer = new Scanner(System.in);
-		
-		do {
-			System.out.println("Pulsa 1 para arrancar");
-			System.out.println("Pulsa 2 para acelerar");
-			System.out.println("Pulsa 3 para frenar");
-			System.out.println("Pulsa 4 para rearrancar");
-			opc = leer.nextInt();
-		} while (opc<1 || opc>4);
-		return opc;
-	}
 
 	public static void main(String[] args) {
-	
-		
-		
-	double random = Math.random() + 1;
-	int intentos = (int) Math.floor(random);
-	
-	Carrera c = new Carrera("Juan", 100);
-	int opc=0; 
-	Coche car;
-		
+
+		double random = Math.random() + 1;
+		int intentos = (int) Math.floor(random);
+
+		Carrera c = null;
+		int opc = 0;
+		int opc1 = 0;
+		Coche car;
+
 		do {
-			opc=pintaMenu();
-			car=c.getvCoches()[0];
-			switch (opc) {
-		
+			opc1 = Menu.pintaMenu();
+			switch (opc1) {
 			case 1:
-				car.arrancar();
-				System.out.println();
+
+				do {
+
+					for (int i = 0; i < c.getvCoches().length; i++) {
+						if (c.getvCoches()[i] != null) {
+							car = c.getvCoches()[i];
+
+							car.setEstadoCoche("MARCHA");
+
+							if (car.isHumano()) {
+								// Juega humano
+								opc = Menu.pintaMenuCarrera();
+								switch (opc) {
+
+								case 2:
+									if (car.getEstadoCoche().equalsIgnoreCase("ACCIDENTADO")) {
+										System.out.println("no puedes acelerar");
+									}else {
+										car.acelerar();
+										System.out.println();
+									}
+									
+									break;
+								case 3:
+									if (car.getEstadoCoche().equalsIgnoreCase("ACCIDENTADO")) {
+										System.out.println("no puedes frenar");
+									}else {
+										car.frenar();
+										System.out.println();
+									}
+									car.frenar();
+									System.out.println();
+									break;
+								case 4:
+									car.rearrancar(intentos);
+									if (intentos > 0) {
+										intentos--;
+									}
+									System.out.println();
+									break;
+								}
+							} else {
+								// Juega Maquina aleatorio
+								Random r = new Random();
+								int opcma = r.nextInt(2);
+								//int opcMa = (int) Math.floor(opcma);
+								if (car.getEstadoCoche().equalsIgnoreCase("ACCIDENTADO")) {
+									car.setEstadoCoche("MARCHA");
+								}else {
+									
+									switch (opcma) {
+									
+									case 0:
+										car.acelerar();
+										System.out.println();
+										break;
+									case 1:
+										car.frenar();
+										System.out.println();
+										break;
+									}
+								}
+								
+							}
+
+						}
+
+					}
+
+				} while (!c.carreraTerminada());
+				System.out.println("Carrera finalizada");
+				opc1=4;
 				break;
 			case 2:
-				car.acelerar();
-				System.out.println();
+				System.out.println("añadiendo corredor");
+				c.rellenarCoche();
 				break;
 			case 3:
-				car.frenar();
-				System.out.println();
+				String nombreCarrera;
+				int kilometros;
+
+				System.out.println("añadiendo carrera");
+				Scanner leer = new Scanner(System.in);
+
+				System.out.println("dime el nombre de la carrera");
+				nombreCarrera = leer.next();
+
+				System.out.println("Dime la distancia de la carrera");
+				kilometros = leer.nextInt();
+
+				c = new Carrera(nombreCarrera, kilometros);
 				break;
 			case 4:
-				car.rearrancar(intentos);
-				if (intentos>0) {
-					intentos--;
-				}
-				System.out.println();
+				System.out.println("salir");
+				opc1 = 4;
+				break;
+
+			default:
 				break;
 			}
-			
-		} while (car.getKmRecorridos()<=car.getDistanciaCarrera());
-		
+		} while (opc1 != 4);
+
 	}
 
 }
